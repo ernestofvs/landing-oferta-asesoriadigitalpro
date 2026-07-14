@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Conversaciones Calificadas — Ernesto Vargas</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --fondo: #0A0D0F;
+  --fondo2: #0E1215;
+  --card: #131820;
+  --card2: #161C25;
+  --borde: rgba(255,255,255,0.07);
+  --borde2: rgba(255,255,255,0.12);
+  --blanco: #FFFFFF;
+  --texto: #8E9BAD;
+  --texto-suave: rgba(142,155,173,0.5);
+  --acento: #4DFFA0;
+  --acento2: #FF6B8A;
+  --acento3: #4D9FFF;
+  --grad: linear-gradient(135deg, #4DFFA0 0%, #4D9FFF 50%, #FF6B8A 100%);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* CANVAS PARTÍCULAS */
+#particles {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+  opacity: 0.4;
+}
+
+/* GLOW DE FONDO */
+.glow-wrap {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.glow {
+  position: absolute; border-radius: 50%;
+  filter: blur(120px); opacity: 0.12;
+}
+.glow-1 { width: 600px; height: 600px; background: #4DFFA0; top: -100px; left: -100px; }
+.glow-2 { width: 500px; height: 500px; background: #FF6B8A; top: 20%; right: -150px; }
+.glow-3 { width: 400px; height: 400px; background: #4D9FFF; bottom: 10%; left: 30%; }
+
+/* LAYOUT */
+.page { position: relative; z-index: 1; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 100; width: calc(100% - 48px); max-width: 1040px;
+  background: rgba(10,13,15,0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--borde2);
+  border-radius: 16px;
+  padding: 14px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px; font-weight: 700; color: var(--blanco);
+  letter-spacing: -0.3px;
+}
+.nav-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  font-size: 13px; color: var(--texto); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blanco); }
+.nav-cta {
+  background: var(--acento); color: #0A0D0F;
+  font-size: 13px; font-weight: 700;
+  padding: 9px 20px; border-radius: 50px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 48px 80px;
+  max-width: 1080px; margin: 0 auto;
+  position: relative;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 2px;
+  color: var(--acento); text-transform: uppercase;
+  margin-bottom: 28px;
+  background: rgba(77,255,160,0.08);
+  border: 1px solid rgba(77,255,160,0.2);
+  padding: 6px 14px; border-radius: 50px;
+  width: fit-content;
+}
+.hero-eyebrow::before { content: '●'; font-size: 6px; }
+
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1; font-weight: 800;
+  letter-spacing: -3px; margin-bottom: 32px;
+  max-width: 900px;
+}
+.hero h1 .grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero h1 .white-text { color: var(--blanco); }
+
+.hero-desc {
+  font-size: 17px; color: var(--texto);
+  max-width: 540px; line-height: 1.75; margin-bottom: 40px;
+}
+.hero-desc strong { color: var(--blanco); font-weight: 500; }
+
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 72px; }
+.btn-p {
+  background: var(--acento); color: #0A0D0F;
+  font-size: 14px; font-weight: 700;
+  padding: 14px 28px; border-radius: 50px;
+  text-decoration: none; transition: opacity 0.2s, transform 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-p:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-s {
+  background: rgba(255,255,255,0.06); color: var(--blanco);
+  font-size: 14px; font-weight: 500;
+  padding: 14px 28px; border-radius: 50px;
+  border: 1px solid var(--borde2);
+  text-decoration: none; transition: background 0.2s, transform 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-s:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+
+/* STATS */
+.hero-stats {
+  display: flex; gap: 0;
+  border-top: 1px solid var(--borde);
+  padding-top: 36px;
+}
+.hstat { flex: 1; }
+.hstat:not(:last-child) {
+  border-right: 1px solid var(--borde);
+  padding-right: 32px; margin-right: 32px;
+}
+.hstat-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px; font-weight: 800; color: var(--blanco);
+  line-height: 1; margin-bottom: 6px;
+}
+.hstat-num .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hstat-label { font-size: 12px; color: var(--texto-suave); line-height: 1.4; }
+
+/* SECCIONES */
+.sec {
+  max-width: 1080px; margin: 0 auto;
+  padding: 80px 48px;
+  border-top: 1px solid var(--borde);
+  position: relative; z-index: 1;
+}
+
+.eyebrow-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--acento);
+  background: rgba(77,255,160,0.08); border: 1px solid rgba(77,255,160,0.18);
+  padding: 5px 13px; border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.sec-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800; letter-spacing: -1.5px;
+  color: var(--blanco); line-height: 1.05;
+  margin-bottom: 12px;
+}
+.sec-title .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.sec-sub {
+  font-size: 15px; color: var(--texto);
+  max-width: 500px; line-height: 1.75; margin-bottom: 48px;
+}
+
+/* OFERTA */
+.oferta-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
+
+.oferta-includes { margin-bottom: 28px; }
+.oferta-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px 0; border-bottom: 1px solid var(--borde);
+  font-size: 14px; color: var(--texto); line-height: 1.6;
+}
+.oferta-item:first-child { border-top: 1px solid var(--borde); }
+.oferta-check { color: var(--acento); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+.oferta-item strong { color: var(--blanco); font-weight: 500; }
+
+.bono-box {
+  background: var(--card2); border: 1px solid var(--borde2);
+  border-radius: 14px; padding: 22px;
+}
+.bono-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--acento); margin-bottom: 14px;
+}
+.bono-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--borde);
+  font-size: 13px; color: var(--texto);
+}
+.bono-row:last-of-type { border-bottom: none; }
+.bono-val { font-weight: 600; color: var(--blanco); }
+.bono-total-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--borde2);
+}
+.bono-total-label { font-size: 11px; color: var(--texto-suave); }
+.bono-total-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px; font-weight: 700; color: var(--texto-suave);
+  text-decoration: line-through;
+}
+
+/* PRECIO CARD */
+.precio-card {
+  background: var(--card2);
+  border: 1px solid var(--borde2);
+  border-radius: 20px; padding: 28px;
+  position: sticky; top: 90px;
+  overflow: hidden;
+}
+.precio-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad);
+}
+.precio-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-suave); margin-bottom: 8px; }
+.precio-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 40px; font-weight: 800; color: var(--blanco);
+  line-height: 1; margin-bottom: 4px;
+}
+.precio-val span { font-size: 18px; color: var(--texto-suave); font-family: 'Inter', sans-serif; font-weight: 300; }
+.precio-sub { font-size: 12px; color: var(--texto-suave); margin-bottom: 24px; }
+
+.garantia-mini {
+  background: rgba(77,255,160,0.06);
+  border: 1px solid rgba(77,255,160,0.15);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+}
+.garantia-mini-title { font-size: 12px; font-weight: 600; color: var(--acento); margin-bottom: 5px; }
+.garantia-mini-text { font-size: 12px; color: var(--texto); line-height: 1.6; }
+
+.btn-cta-card {
+  display: block; width: 100%;
+  background: var(--acento); color: #0A0D0F;
+  text-align: center; font-size: 14px; font-weight: 700;
+  padding: 14px; border-radius: 50px; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-cta-card:hover { opacity: 0.85; }
+.precio-disclaimer { font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 12px; line-height: 1.5; }
+
+/* GARANTÍA */
+.garantia-box {
+  background: var(--card);
+  border: 1px solid var(--borde2);
+  border-radius: 16px; padding: 36px;
+  display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
+  position: relative; overflow: hidden;
+}
+.garantia-box::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; bottom: 0; width: 3px;
+  background: var(--grad);
+}
+.garantia-icon { font-size: 40px; line-height: 1; }
+.garantia-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px; font-weight: 800; color: var(--blanco); margin-bottom: 10px;
+}
+.garantia-text { font-size: 14px; color: var(--texto); line-height: 1.8; }
+.garantia-text strong { color: var(--acento); font-weight: 500; }
+
+/* PROCESO */
+.proceso-list { display: flex; flex-direction: column; gap: 0; }
+.paso {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: 24px; padding: 28px 0;
+  border-bottom: 1px solid var(--borde);
+  align-items: start;
+}
+.paso:first-child { border-top: 1px solid var(--borde); }
+.paso-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  color: var(--acento);
+  background: rgba(77,255,160,0.08); border: 1px solid rgba(77,255,160,0.18);
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.paso-title { font-size: 16px; font-weight: 600; color: var(--blanco); margin-bottom: 6px; font-family: 'Outfit', sans-serif; }
+.paso-desc { font-size: 14px; color: var(--texto); line-height: 1.65; }
+
+/* CASOS */
+.casos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.caso {
+  background: var(--card); border: 1px solid var(--borde);
+  border-radius: 14px; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.caso:hover { border-color: rgba(77,255,160,0.25); transform: translateY(-2px); }
+.caso.feat { grid-column: span 2; display: grid; grid-template-columns: 260px 1fr; }
+
+.feat-l {
+  background: var(--card2); padding: 32px 28px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--borde);
+}
+.feat-empresa { font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: var(--blanco); margin-bottom: 3px; }
+.feat-desc { font-size: 11px; color: var(--texto-suave); margin-bottom: 24px; }
+.feat-roas {
+  font-family: 'Outfit', sans-serif;
+  font-size: 60px; font-weight: 800;
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1; margin-bottom: 2px;
+}
+.feat-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-suave); margin-bottom: 16px; }
+.feat-ctx { font-size: 12px; color: var(--texto-suave); line-height: 1.65; border-top: 1px solid var(--borde); padding-top: 14px; }
+
+.caso-head {
+  padding: 18px 20px 14px; border-bottom: 1px solid var(--borde);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
+}
+.caso-empresa { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--blanco); margin-bottom: 2px; }
+.caso-desc-txt { font-size: 11px; color: var(--texto-suave); }
+.canal {
+  font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 50px; border: 1px solid; white-space: nowrap;
+}
+.canal.meta   { color: #5B9FE8; border-color: rgba(91,159,232,0.3); background: rgba(91,159,232,0.06); }
+.canal.google { color: #E87B78; border-color: rgba(232,123,120,0.3); background: rgba(232,123,120,0.06); }
+.canal.mix    { color: var(--acento); border-color: rgba(77,255,160,0.3); background: rgba(77,255,160,0.06); }
+
+.nums { padding: 18px 20px; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.n-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px; font-weight: 800; color: var(--blanco);
+  line-height: 1; margin-bottom: 4px;
+}
+.n-val.hl { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.n-label { font-size: 11px; color: var(--texto-suave); line-height: 1.4; }
+.caso-nota { padding: 0 20px 14px; font-size: 11px; color: var(--texto-suave); font-style: italic; line-height: 1.6; border-top: 1px solid var(--borde); padding-top: 10px; }
+
+/* SOBRE */
+.sobre-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
+.sobre-txt p { font-size: 15px; color: var(--texto); line-height: 1.85; margin-bottom: 14px; }
+.sobre-txt p strong { color: var(--blanco); font-weight: 500; }
+.sobre-photo {
+  position: relative;
+}
+.sobre-photo::before {
+  content: '';
+  position: absolute; inset: -1px;
+  background: var(--grad); border-radius: 16px; z-index: 0;
+  padding: 1px;
+}
+.sobre-photo img {
+  width: 100%; border-radius: 14px; display: block;
+  filter: grayscale(15%); position: relative; z-index: 1;
+}
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+details.faq { border-bottom: 1px solid var(--borde); }
+details.faq:first-child { border-top: 1px solid var(--borde); }
+summary.faq-q {
+  padding: 20px 0; cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 15px; font-weight: 500; color: var(--blanco);
+}
+summary.faq-q::after { content: '+'; color: var(--acento); font-size: 22px; font-weight: 300; transition: transform 0.2s; }
+details[open] summary.faq-q::after { transform: rotate(45deg); }
+.faq-a { padding: 0 0 20px; font-size: 14px; color: var(--texto); line-height: 1.8; max-width: 640px; }
+.faq-a strong { color: var(--blanco); font-weight: 500; }
+
+/* CTA */
+.cta-sec {
+  padding: 100px 48px;
+  text-align: center;
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--borde);
+}
+.cta-inner { max-width: 580px; margin: 0 auto; }
+.cta-sec h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(32px, 4.5vw, 54px); font-weight: 800;
+  letter-spacing: -2px; color: var(--blanco);
+  line-height: 1.0; margin-bottom: 20px;
+}
+.cta-sec h2 .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.cta-sec p { font-size: 15px; color: var(--texto); line-height: 1.75; margin-bottom: 36px; }
+.cta-disclaimer { font-size: 12px; color: var(--texto-suave); margin-top: 16px; line-height: 1.6; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--borde);
+  padding: 22px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--texto-suave);
+  position: relative; z-index: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  nav { width: calc(100% - 24px); padding: 12px 16px; }
+  .nav-links { display: none; }
+  .hero, .sec { padding-left: 20px; padding-right: 20px; }
+  .hero { padding-top: 100px; }
+  .hero h1 { letter-spacing: -2px; }
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .hstat:not(:last-child) { border-right: none; border-bottom: 1px solid var(--borde); padding-right: 0; margin-right: 0; padding-bottom: 20px; }
+  .oferta-layout { grid-template-columns: 1fr; }
+  .precio-card { position: static; }
+  .garantia-box { grid-template-columns: 1fr; }
+  .casos-grid { grid-template-columns: 1fr; }
+  .caso.feat { grid-column: span 1; grid-template-columns: 1fr; }
+  .feat-l { border-right: none; border-bottom: 1px solid var(--borde); }
+  .sobre-grid { grid-template-columns: 1fr; }
+  .sobre-photo { max-width: 260px; }
+  .cta-sec { padding: 60px 20px; }
+  footer { padding: 20px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- GLOWS -->
+<div class="glow-wrap">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+</div>
+
+<!-- PARTÍCULAS -->
+<canvas id="particles"></canvas>
+
+<div class="page">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Asesoría <span>Digital Pro</span></div>
+  <div class="nav-links">
+    <a href="#oferta">Oferta</a>
+    <a href="#casos">Casos</a>
+    <a href="#sobre">Sobre mí</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="https://wa.me/573207328453" class="nav-cta" target="_blank">Quiero empezar →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Paid Media · Captación de clientes</div>
+  <h1>
+    <span class="white-text">Más clientes<br>por WhatsApp.</span><br>
+    <span class="grad-text">Menos costo.</span>
+  </h1>
+  <p class="hero-desc">
+    Campañas de Meta Ads y Google Ads especializadas en generar <strong>conversaciones calificadas</strong> para negocios que cierran con asesor comercial. Resultados medibles desde el primer mes.
+  </p>
+  <div class="hero-btns">
+    <a href="https://wa.me/573207328453" class="btn-p" target="_blank">Quiero más clientes →</a>
+    <a href="#casos" class="btn-s">Ver casos reales</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num"><span class="g">33</span>x</div>
+      <div class="hstat-label">ROAS mejor<br>campaña documentada</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">320</div>
+      <div class="hstat-label">leads en un mes<br>con $500k invertidos</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">12+</div>
+      <div class="hstat-label">años generando<br>resultados en paid media</div>
+    </div>
+  </div>
+</div>
+
+<!-- OFERTA -->
+<div class="sec" id="oferta">
+  <div class="eyebrow-pill">La oferta</div>
+  <h2 class="sec-title">Sistema de <span class="g">Conversaciones<br>Calificadas</span></h2>
+  <p class="sec-sub">No pagas por gestión de anuncios. Pagas por un sistema que trae personas listas para comprar directamente a tu WhatsApp o formulario.</p>
+
+  <div class="oferta-layout">
+    <div>
+      <div class="oferta-includes">
+        <div class="oferta-item"><span class="oferta-check">✓</span><span>Configuración y gestión de campañas Meta Ads — <strong>mensajes WhatsApp y formulario de leads</strong></span></div>
+        <div class="oferta-item"><span class="oferta-check">✓</span><span>Segmentación de audiencias diseñada para tu negocio específico</span></div>
+        <div class="oferta-item"><span class="oferta-check">✓</span><span>Optimizaciones semanales para bajar el costo por conversación</span></div>
+        <div class="oferta-item"><span class="oferta-check">✓</span><span>Seguimiento de métricas clave — sabes exactamente qué está pasando</span></div>
+        <div class="oferta-item"><span class="oferta-check">✓</span><span>Reporte mensual con datos reales y próximos pasos</span></div>
+      </div>
+      <div class="bono-box">
+        <div class="bono-label">Bonos incluidos sin costo adicional</div>
+        <div class="bono-row"><span>Implementación completa de campañas desde cero</span><span class="bono-val">$400.000</span></div>
+        <div class="bono-row"><span>Configuración del píxel y API de conversiones</span><span class="bono-val">$250.000</span></div>
+        <div class="bono-row"><span>Guía de respuesta rápida para tu equipo comercial</span><span class="bono-val">$150.000</span></div>
+        <div class="bono-total-row">
+          <span class="bono-total-label">Valor total de bonos</span>
+          <span class="bono-total-val">$800.000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="precio-card">
+      <div class="precio-label">Inversión mensual en gestión</div>
+      <div class="precio-val">$800.000 <span>COP</span></div>
+      <div class="precio-sub">+ presupuesto de pauta desde $1.5M/mes</div>
+      <div class="garantia-mini">
+        <div class="garantia-mini-title">🛡 Garantía de resultados</div>
+        <div class="garantia-mini-text">Si al mes 2 el costo por conversación no está en el rango acordado, el mes 3 lo gestiono sin cobrar mi fee.</div>
+      </div>
+      <a href="https://wa.me/573207328453?text=Hola%20Ernesto%2C%20me%20interesa%20el%20Sistema%20de%20Conversaciones%20Calificadas" class="btn-cta-card" target="_blank">Quiero empezar →</a>
+      <div class="precio-disclaimer">Sin contratos largos el primer mes.<br>Solo 3 clientes nuevos por mes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- GARANTÍA -->
+<div class="sec" style="padding-top: 0; border-top: none;">
+  <div class="garantia-box">
+    <div class="garantia-icon">🛡️</div>
+    <div>
+      <div class="garantia-title">La garantía sin letra pequeña</div>
+      <div class="garantia-text">
+        Al inicio definimos juntos un <strong>rango de costo por conversación razonable para tu negocio</strong>. Si al mes 2 ese número no se cumple, el mes 3 lo gestiono <strong>sin cobrar mi fee</strong>.<br><br>
+        Puedo ofrecer esto porque confío en el proceso. Lo he aplicado en ecommerce, servicios y eventos con resultados documentados. Si tú pones el producto y el equipo que atiende los mensajes, yo pongo las conversaciones.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESO -->
+<div class="sec" id="proceso">
+  <div class="eyebrow-pill">Cómo funciona</div>
+  <h2 class="sec-title">Del primer contacto<br>a campañas activas<br><span class="g">en 7 días</span></h2>
+  <div class="proceso-list">
+    <div class="paso">
+      <div class="paso-num">01</div>
+      <div>
+        <div class="paso-title">Diagnóstico del negocio</div>
+        <div class="paso-desc">Entiendo tu producto, tu cliente ideal y tu proceso de cierre. Definimos juntos el rango de costo por conversación que tiene sentido para tu negocio.</div>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">02</div>
+      <div>
+        <div class="paso-title">Estructura y configuración</div>
+        <div class="paso-desc">Configuro píxel, API de conversiones, audiencias y estructura de campañas. Todo listo antes de gastar un peso en pauta.</div>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">03</div>
+      <div>
+        <div class="paso-title">Campañas activas</div>
+        <div class="paso-desc">Lanzamos. Monitoreo diario, optimizaciones semanales, ajustes en tiempo real si algo no está rindiendo.</div>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">04</div>
+      <div>
+        <div class="paso-title">Reporte y escala</div>
+        <div class="paso-desc">Al mes te muestro los números reales — qué funcionó, qué no, y cómo escalar lo que ya está convirtiendo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASOS -->
+<div class="sec" id="casos">
+  <div class="eyebrow-pill">Casos reales</div>
+  <h2 class="sec-title">Números que <span class="g">no se inventan</span></h2>
+  <p class="sec-sub">Mejores meses documentados por cuenta. Sin redondeos ni estimaciones.</p>
+
+  <div class="casos-grid">
+    <div class="caso feat">
+      <div class="feat-l">
+        <div class="feat-empresa">Pladani</div>
+        <div class="feat-desc">Retail iPhones a crédito · Meta Ads</div>
+        <div class="feat-roas">33x</div>
+        <div class="feat-lbl">ROAS — Mejor mes</div>
+        <div class="feat-ctx">$30M COP invertidos. $1.000M COP en ventas brutas. Modelo por leads vía WhatsApp con cierre del equipo comercial. Ventas brutas — el margen del producto no era una variable de mi gestión.</div>
+      </div>
+      <div>
+        <div class="caso-head">
+          <div><div class="caso-empresa">Métricas del mejor mes</div><div class="caso-desc-txt">Retail Apple — Colombia</div></div>
+          <span class="canal meta">Meta Ads</span>
+        </div>
+        <div class="nums">
+          <div><div class="n-val">$30M</div><div class="n-label">Inversión COP</div></div>
+          <div><div class="n-val hl">$1.000M</div><div class="n-label">Ventas brutas COP</div></div>
+          <div><div class="n-val">WA</div><div class="n-label">Canal de conversión</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caso">
+      <div class="caso-head">
+        <div><div class="caso-empresa">Tusim Travel</div><div class="caso-desc-txt">eSIM cards · Ecommerce</div></div>
+        <span class="canal meta">Meta Ads</span>
+      </div>
+      <div class="nums">
+        <div><div class="n-val">$1.2M</div><div class="n-label">Inversión COP</div></div>
+        <div><div class="n-val hl">~13x</div><div class="n-label">ROAS</div></div>
+        <div><div class="n-val">$16M</div><div class="n-label">Ventas COP</div></div>
+      </div>
+      <div class="caso-nota">Ecommerce de tecnología para viajeros. Mejor mes julio 2024.</div>
+    </div>
+
+    <div class="caso">
+      <div class="caso-head">
+        <div><div class="caso-empresa">Unisa Inmobiliaria</div><div class="caso-desc-txt">Captación propietarios · Google Ads</div></div>
+        <span class="canal google">Google Ads</span>
+      </div>
+      <div class="nums">
+        <div><div class="n-val">$500K</div><div class="n-label">Inversión COP</div></div>
+        <div><div class="n-val hl">320</div><div class="n-label">Leads totales</div></div>
+        <div><div class="n-val">6.447</div><div class="n-label">Clics</div></div>
+      </div>
+      <div class="caso-nota">Performance Max. 160 arriendo + 115 venta + 45 WhatsApp. Con $500.000 COP.</div>
+    </div>
+
+    <div class="caso">
+      <div class="caso-head">
+        <div><div class="caso-empresa">Perrenque Creativo 2025·2026</div><div class="caso-desc-txt">Evento cultural · Barranquilla</div></div>
+        <span class="canal mix">Meta + TikTok</span>
+      </div>
+      <div class="nums">
+        <div><div class="n-val">$10M</div><div class="n-label">Inversión COP</div></div>
+        <div><div class="n-val hl">$19.4M</div><div class="n-label">Tickets premium</div></div>
+        <div><div class="n-val">2.500</div><div class="n-label">Inscritos gratuitos</div></div>
+      </div>
+      <div class="caso-nota">Responsable del performance en ambas ediciones. Casi 2x retorno en tickets premium.</div>
+    </div>
+
+    <div class="caso">
+      <div class="caso-head">
+        <div><div class="caso-empresa">Damisela Lingerie</div><div class="caso-desc-txt">Lencería · Ecommerce DTC</div></div>
+        <span class="canal meta">Meta Ads</span>
+      </div>
+      <div class="nums">
+        <div><div class="n-val">$1.9M</div><div class="n-label">Inversión COP</div></div>
+        <div><div class="n-val hl">4x</div><div class="n-label">ROAS</div></div>
+        <div><div class="n-val">$7.7M</div><div class="n-label">Ventas COP</div></div>
+      </div>
+      <div class="caso-nota">Ecommerce de nicho. ROAS consistente en el mejor mes documentado.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<div class="sec" id="sobre">
+  <div class="eyebrow-pill">Quién está detrás</div>
+  <h2 class="sec-title">Ernesto Vargas</h2>
+  <div class="sobre-grid">
+    <div class="sobre-txt">
+      <p>Soy <strong>comunicador social de profesión y experto en performance marketing</strong>. Esa combinación no es casual — entiendo los mensajes, cómo construir un argumento y por qué una pieza conecta con una audiencia. Eso, combinado con más de 12 años en paid media, diferencia mi trabajo del de alguien que solo maneja dashboards.</p>
+      <p>Empecé en medios de comunicación en Venezuela. Cuando el sector colapsó, migré al mundo digital — primero en community management, luego en publicidad, hasta especializarme en <strong>campañas de mensajes a WhatsApp y captación de leads por formulario</strong> para negocios que cierran con asesor comercial.</p>
+      <p>No soy una agencia de 10 personas. Soy la persona que trabaja tu cuenta directamente, todos los días.</p>
+    </div>
+    <div class="sobre-photo">
+      <img src="http://asesoriadigitalpro.com/wp-content/uploads/2026/06/banner-adp-1.png" alt="Ernesto Vargas">
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="sec" id="faq">
+  <div class="eyebrow-pill">Preguntas frecuentes</div>
+  <h2 class="sec-title">Lo que siempre<br><span class="g">me preguntan</span></h2>
+  <div class="faq-list">
+    <details class="faq">
+      <summary class="faq-q">¿El presupuesto de pauta está incluido en los $800.000?</summary>
+      <div class="faq-a">No. Los $800.000 COP son mi fee de gestión. El presupuesto de pauta lo inviertes tú directamente en Meta o Google. El mínimo recomendado es <strong>$1.500.000 COP/mes en pauta</strong>.</div>
+    </details>
+    <details class="faq">
+      <summary class="faq-q">¿Cómo funciona la garantía exactamente?</summary>
+      <div class="faq-a">Al inicio definimos un rango de costo por conversación razonable para tu negocio. Si al mes 2 ese número no se cumple, el mes 3 lo gestiono <strong>sin cobrar mi fee</strong>. Aplica siempre que tengas equipo que atienda los mensajes y la pauta esté activa.</div>
+    </details>
+    <details class="faq">
+      <summary class="faq-q">¿Cuánto tiempo para ver los primeros resultados?</summary>
+      <div class="faq-a">Las primeras conversaciones o leads llegan en la primera semana. Los costos se optimizan progresivamente durante el mes 1. El mes 2 es donde el rendimiento se estabiliza y escala.</div>
+    </details>
+    <details class="faq">
+      <summary class="faq-q">¿Solo trabajas con Meta Ads?</summary>
+      <div class="faq-a">No. El plan base incluye Meta Ads. Si tu negocio se beneficia de Google Ads o TikTok Ads, lo conversamos y ajustamos la estrategia.</div>
+    </details>
+    <details class="faq">
+      <summary class="faq-q">¿Qué necesito tener listo antes de empezar?</summary>
+      <div class="faq-a">Necesitas: <strong>(1)</strong> un producto o servicio con demanda real, <strong>(2)</strong> alguien que atienda WhatsApp rápido, <strong>(3)</strong> acceso a tu cuenta de Meta Business, y <strong>(4)</strong> presupuesto mínimo de $1.5M COP/mes en pauta.</div>
+    </details>
+    <details class="faq">
+      <summary class="faq-q">¿Cuántos clientes manejas al mismo tiempo?</summary>
+      <div class="faq-a">Máximo 3 clientes nuevos por mes. No tercerizo — gestiono cada cuenta directamente.</div>
+    </details>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-sec" id="contacto">
+  <div class="cta-inner">
+    <div class="eyebrow-pill" style="margin: 0 auto 24px; display: inline-flex;">Siguiente paso</div>
+    <h2>¿Tu negocio necesita<br>más <span class="g">clientes?</span></h2>
+    <p>Escríbeme por WhatsApp, cuéntame qué vendes y en menos de 24 horas te digo si puedo ayudarte y cuánto te costaría un lead en tu nicho.</p>
+    <a href="https://wa.me/573207328453?text=Hola%20Ernesto%2C%20me%20interesa%20el%20Sistema%20de%20Conversaciones%20Calificadas" class="btn-p" target="_blank">Escribir por WhatsApp →</a>
+    <div class="cta-disclaimer">Sin compromiso. Sin contratos largos el primer mes.<br>Si no veo potencial real en tu negocio, te lo digo antes de cobrar.</div>
+  </div>
+</div>
+
+<footer>
+  <span>Ernesto Vargas — Asesoría Digital Pro</span>
+  <span>asesoriadigitalpro.com · Barranquilla, Colombia</span>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+// PARTÍCULAS
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function Particle() {
+  this.x = Math.random() * canvas.width;
+  this.y = Math.random() * canvas.height;
+  this.size = Math.random() * 1.5 + 0.5;
+  this.speedX = (Math.random() - 0.5) * 0.3;
+  this.speedY = (Math.random() - 0.5) * 0.3;
+  this.opacity = Math.random() * 0.5 + 0.1;
+  const colors = ['#4DFFA0', '#4D9FFF', '#FF6B8A', '#FFFFFF'];
+  this.color = colors[Math.floor(Math.random() * colors.length)];
+}
+
+Particle.prototype.update = function() {
+  this.x += this.speedX;
+  this.y += this.speedY;
+  if (this.x < 0) this.x = canvas.width;
+  if (this.x > canvas.width) this.x = 0;
+  if (this.y < 0) this.y = canvas.height;
+  if (this.y > canvas.height) this.y = 0;
+};
+
+Particle.prototype.draw = function() {
+  ctx.save();
+  ctx.globalAlpha = this.opacity;
+  ctx.fillStyle = this.color;
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+};
+
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
