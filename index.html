@@ -25,7 +25,6 @@
 }
 
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Inter', sans-serif;
   background: var(--fondo);
@@ -37,46 +36,32 @@ body {
 #particles {
   position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;
-  pointer-events: none; z-index: 0;
-  opacity: 0.4;
+  pointer-events: none; z-index: 0; opacity: 0.4;
 }
 
 .glow-wrap {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none; z-index: 0; overflow: hidden;
 }
-.glow {
-  position: absolute; border-radius: 50%;
-  filter: blur(120px); opacity: 0.12;
-}
+.glow { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.12; }
 .glow-1 { width: 600px; height: 600px; background: #4DFFA0; top: -100px; left: -100px; }
 .glow-2 { width: 500px; height: 500px; background: #FF6B8A; top: 20%; right: -150px; }
 .glow-3 { width: 400px; height: 400px; background: #4D9FFF; bottom: 10%; left: 30%; }
 
 .page { position: relative; z-index: 1; }
-.wrap { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
 
 nav {
   position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
   z-index: 100; width: calc(100% - 48px); max-width: 1040px;
-  background: rgba(10,13,15,0.7);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--borde2);
-  border-radius: 16px;
+  background: rgba(10,13,15,0.7); backdrop-filter: blur(16px);
+  border: 1px solid var(--borde2); border-radius: 16px;
   padding: 14px 24px;
   display: flex; justify-content: space-between; align-items: center;
 }
-.nav-logo {
-  font-family: 'Outfit', sans-serif;
-  font-size: 15px; font-weight: 700; color: var(--blanco);
-  letter-spacing: -0.3px;
-}
+.nav-logo { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--blanco); letter-spacing: -0.3px; }
 .nav-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .nav-links { display: flex; gap: 28px; }
-.nav-links a {
-  font-size: 13px; color: var(--texto); text-decoration: none;
-  transition: color 0.2s;
-}
+.nav-links a { font-size: 13px; color: var(--texto); text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--blanco); }
 .nav-cta {
   background: var(--acento); color: #0A0D0F;
@@ -91,7 +76,6 @@ nav {
   display: flex; flex-direction: column; justify-content: center;
   padding: 120px 48px 80px;
   max-width: 1080px; margin: 0 auto;
-  position: relative;
 }
 
 .hero-eyebrow {
@@ -99,10 +83,8 @@ nav {
   font-size: 11px; font-weight: 500; letter-spacing: 2px;
   color: var(--acento); text-transform: uppercase;
   margin-bottom: 28px;
-  background: rgba(77,255,160,0.08);
-  border: 1px solid rgba(77,255,160,0.2);
-  padding: 6px 14px; border-radius: 50px;
-  width: fit-content;
+  background: rgba(77,255,160,0.08); border: 1px solid rgba(77,255,160,0.2);
+  padding: 6px 14px; border-radius: 50px; width: fit-content;
 }
 .hero-eyebrow::before { content: '●'; font-size: 6px; }
 
@@ -110,21 +92,22 @@ nav {
   font-family: 'Outfit', sans-serif;
   font-size: clamp(42px, 6vw, 76px);
   line-height: 1; font-weight: 800;
-  letter-spacing: -3px; margin-bottom: 32px;
+  letter-spacing: -3px; margin-bottom: 24px;
   max-width: 900px;
 }
-.hero h1 .grad-text {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.hero h1 .grad-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero h1 .white-text { color: var(--blanco); }
 
-.hero-desc {
-  font-size: 17px; color: var(--texto);
-  max-width: 540px; line-height: 1.75; margin-bottom: 40px;
+.hero-precio-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--borde2);
+  border-radius: 50px; padding: 8px 18px;
+  font-size: 13px; color: var(--texto);
+  margin-bottom: 24px; width: fit-content;
 }
+.hero-precio-tag strong { color: var(--acento); font-weight: 600; }
+
+.hero-desc { font-size: 17px; color: var(--texto); max-width: 540px; line-height: 1.75; margin-bottom: 40px; }
 .hero-desc strong { color: var(--blanco); font-weight: 500; }
 
 .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 72px; }
@@ -146,21 +129,10 @@ nav {
 }
 .btn-s:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
 
-.hero-stats {
-  display: flex; gap: 0;
-  border-top: 1px solid var(--borde);
-  padding-top: 36px;
-}
+.hero-stats { display: flex; gap: 0; border-top: 1px solid var(--borde); padding-top: 36px; }
 .hstat { flex: 1; }
-.hstat:not(:last-child) {
-  border-right: 1px solid var(--borde);
-  padding-right: 32px; margin-right: 32px;
-}
-.hstat-num {
-  font-family: 'Outfit', sans-serif;
-  font-size: 36px; font-weight: 800; color: var(--blanco);
-  line-height: 1; margin-bottom: 6px;
-}
+.hstat:not(:last-child) { border-right: 1px solid var(--borde); padding-right: 32px; margin-right: 32px; }
+.hstat-num { font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800; color: var(--blanco); line-height: 1; margin-bottom: 6px; }
 .hstat-num .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hstat-label { font-size: 12px; color: var(--texto-suave); line-height: 1.4; }
 
@@ -176,22 +148,17 @@ nav {
   font-size: 10px; font-weight: 600; letter-spacing: 2px;
   text-transform: uppercase; color: var(--acento);
   background: rgba(77,255,160,0.08); border: 1px solid rgba(77,255,160,0.18);
-  padding: 5px 13px; border-radius: 50px;
-  margin-bottom: 20px;
+  padding: 5px 13px; border-radius: 50px; margin-bottom: 20px;
 }
 
 .sec-title {
   font-family: 'Outfit', sans-serif;
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 800; letter-spacing: -1.5px;
-  color: var(--blanco); line-height: 1.05;
-  margin-bottom: 12px;
+  color: var(--blanco); line-height: 1.05; margin-bottom: 12px;
 }
 .sec-title .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.sec-sub {
-  font-size: 15px; color: var(--texto);
-  max-width: 500px; line-height: 1.75; margin-bottom: 48px;
-}
+.sec-sub { font-size: 15px; color: var(--texto); max-width: 500px; line-height: 1.75; margin-bottom: 48px; }
 
 .oferta-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
 
@@ -205,14 +172,8 @@ nav {
 .oferta-check { color: var(--acento); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
 .oferta-item strong { color: var(--blanco); font-weight: 500; }
 
-.bono-box {
-  background: var(--card2); border: 1px solid var(--borde2);
-  border-radius: 14px; padding: 22px;
-}
-.bono-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--acento); margin-bottom: 14px;
-}
+.bono-box { background: var(--card2); border: 1px solid var(--borde2); border-radius: 14px; padding: 22px; }
+.bono-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--acento); margin-bottom: 14px; }
 .bono-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 10px 0; border-bottom: 1px solid var(--borde);
@@ -225,36 +186,21 @@ nav {
   padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--borde2);
 }
 .bono-total-label { font-size: 11px; color: var(--texto-suave); }
-.bono-total-val {
-  font-family: 'Outfit', sans-serif;
-  font-size: 18px; font-weight: 700; color: var(--texto-suave);
-  text-decoration: line-through;
-}
+.bono-total-val { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; color: var(--texto-suave); text-decoration: line-through; }
 
 .precio-card {
-  background: var(--card2);
-  border: 1px solid var(--borde2);
+  background: var(--card2); border: 1px solid var(--borde2);
   border-radius: 20px; padding: 28px;
-  position: sticky; top: 90px;
-  overflow: hidden;
+  position: sticky; top: 90px; overflow: hidden;
 }
-.precio-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--grad);
-}
+.precio-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); }
 .precio-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-suave); margin-bottom: 8px; }
-.precio-val {
-  font-family: 'Outfit', sans-serif;
-  font-size: 40px; font-weight: 800; color: var(--blanco);
-  line-height: 1; margin-bottom: 4px;
-}
+.precio-val { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 800; color: var(--blanco); line-height: 1; margin-bottom: 4px; }
 .precio-val span { font-size: 18px; color: var(--texto-suave); font-family: 'Inter', sans-serif; font-weight: 300; }
 .precio-sub { font-size: 12px; color: var(--texto-suave); margin-bottom: 24px; }
 
 .garantia-mini {
-  background: rgba(77,255,160,0.06);
-  border: 1px solid rgba(77,255,160,0.15);
+  background: rgba(77,255,160,0.06); border: 1px solid rgba(77,255,160,0.15);
   border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
 }
 .garantia-mini-title { font-size: 12px; font-weight: 600; color: var(--acento); margin-bottom: 5px; }
@@ -264,48 +210,31 @@ nav {
   display: block; width: 100%;
   background: var(--acento); color: #0A0D0F;
   text-align: center; font-size: 14px; font-weight: 700;
-  padding: 14px; border-radius: 50px; text-decoration: none;
-  transition: opacity 0.2s;
+  padding: 14px; border-radius: 50px; text-decoration: none; transition: opacity 0.2s;
 }
 .btn-cta-card:hover { opacity: 0.85; }
 .precio-disclaimer { font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 12px; line-height: 1.5; }
 
 .garantia-box {
-  background: var(--card);
-  border: 1px solid var(--borde2);
+  background: var(--card); border: 1px solid var(--borde2);
   border-radius: 16px; padding: 36px;
   display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
   position: relative; overflow: hidden;
 }
-.garantia-box::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; bottom: 0; width: 3px;
-  background: var(--grad);
-}
+.garantia-box::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: var(--grad); }
 .garantia-icon { font-size: 40px; line-height: 1; }
-.garantia-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 20px; font-weight: 800; color: var(--blanco); margin-bottom: 10px;
-}
+.garantia-title { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--blanco); margin-bottom: 10px; }
 .garantia-text { font-size: 14px; color: var(--texto); line-height: 1.8; }
 .garantia-text strong { color: var(--acento); font-weight: 500; }
 
 .proceso-list { display: flex; flex-direction: column; gap: 0; }
-.paso {
-  display: grid; grid-template-columns: 56px 1fr;
-  gap: 24px; padding: 28px 0;
-  border-bottom: 1px solid var(--borde);
-  align-items: start;
-}
+.paso { display: grid; grid-template-columns: 56px 1fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--borde); align-items: start; }
 .paso:first-child { border-top: 1px solid var(--borde); }
 .paso-num {
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px; font-weight: 700; letter-spacing: 1px;
-  color: var(--acento);
-  background: rgba(77,255,160,0.08); border: 1px solid rgba(77,255,160,0.18);
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  color: var(--acento); background: rgba(77,255,160,0.08); border: 1px solid rgba(77,255,160,0.18);
   width: 40px; height: 40px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin-top: 2px;
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
 }
 .paso-title { font-size: 16px; font-weight: 600; color: var(--blanco); margin-bottom: 6px; font-family: 'Outfit', sans-serif; }
 .paso-desc { font-size: 14px; color: var(--texto); line-height: 1.65; }
@@ -326,12 +255,7 @@ nav {
 }
 .feat-empresa { font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: var(--blanco); margin-bottom: 3px; }
 .feat-desc { font-size: 11px; color: var(--texto-suave); margin-bottom: 24px; }
-.feat-roas {
-  font-family: 'Outfit', sans-serif;
-  font-size: 60px; font-weight: 800;
-  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  line-height: 1; margin-bottom: 2px;
-}
+.feat-roas { font-family: 'Outfit', sans-serif; font-size: 60px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 2px; }
 .feat-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-suave); margin-bottom: 16px; }
 .feat-ctx { font-size: 12px; color: var(--texto-suave); line-height: 1.65; border-top: 1px solid var(--borde); padding-top: 14px; }
 
@@ -350,29 +274,17 @@ nav {
 .canal.mix    { color: var(--acento); border-color: rgba(77,255,160,0.3); background: rgba(77,255,160,0.06); }
 
 .nums { padding: 18px 20px; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-.n-val {
-  font-family: 'Outfit', sans-serif;
-  font-size: 20px; font-weight: 800; color: var(--blanco);
-  line-height: 1; margin-bottom: 4px;
-}
+.n-val { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--blanco); line-height: 1; margin-bottom: 4px; }
 .n-val.hl { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .n-label { font-size: 11px; color: var(--texto-suave); line-height: 1.4; }
-.caso-nota { padding: 0 20px 14px; font-size: 11px; color: var(--texto-suave); font-style: italic; line-height: 1.6; border-top: 1px solid var(--borde); padding-top: 10px; }
+.caso-nota { padding: 10px 20px 14px; font-size: 11px; color: var(--texto-suave); font-style: italic; line-height: 1.6; border-top: 1px solid var(--borde); }
 
 .sobre-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
 .sobre-txt p { font-size: 15px; color: var(--texto); line-height: 1.85; margin-bottom: 14px; }
 .sobre-txt p strong { color: var(--blanco); font-weight: 500; }
 .sobre-photo { position: relative; }
-.sobre-photo::before {
-  content: '';
-  position: absolute; inset: -1px;
-  background: var(--grad); border-radius: 16px; z-index: 0;
-  padding: 1px;
-}
-.sobre-photo img {
-  width: 100%; border-radius: 14px; display: block;
-  filter: grayscale(15%); position: relative; z-index: 1;
-}
+.sobre-photo::before { content: ''; position: absolute; inset: -1px; background: var(--grad); border-radius: 16px; z-index: 0; }
+.sobre-photo img { width: 100%; border-radius: 14px; display: block; filter: grayscale(15%); position: relative; z-index: 1; }
 
 .faq-list { display: flex; flex-direction: column; gap: 0; }
 details.faq { border-bottom: 1px solid var(--borde); }
@@ -388,8 +300,7 @@ details[open] summary.faq-q::after { transform: rotate(45deg); }
 .faq-a strong { color: var(--blanco); font-weight: 500; }
 
 .cta-sec {
-  padding: 100px 48px;
-  text-align: center;
+  padding: 100px 48px; text-align: center;
   position: relative; z-index: 1;
   border-top: 1px solid var(--borde);
 }
@@ -440,7 +351,6 @@ footer {
   <div class="glow glow-2"></div>
   <div class="glow glow-3"></div>
 </div>
-
 <canvas id="particles"></canvas>
 
 <div class="page">
@@ -456,14 +366,16 @@ footer {
   <a href="https://wa.me/573207328453" class="nav-cta" target="_blank">Quiero empezar →</a>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Paid Media · Captación de clientes</div>
   <h1>
-    <span class="white-text">Más clientes<br>por WhatsApp.</span><br>
-    <span class="grad-text">Menos costo.</span>
+    <span class="white-text">Conversaciones de personas<br>que ya quieren lo que vendes.</span><br>
+    <span class="grad-text">Directo a tu WhatsApp.</span>
   </h1>
+  <div class="hero-precio-tag">Desde <strong>$800.000 COP/mes</strong> de gestión · Pauta adicional desde $1.5M/mes</div>
   <p class="hero-desc">
-    Campañas de Meta Ads y Google Ads especializadas en generar <strong>conversaciones calificadas</strong> para negocios que cierran con asesor comercial. Resultados medibles desde el primer mes.
+    Campañas de Meta Ads y Google Ads especializadas en generar <strong>conversaciones calificadas</strong> para negocios que cierran con asesor comercial o agente de inteligencia artificial. Resultados medibles desde el primer mes.
   </p>
   <div class="hero-btns">
     <a href="https://wa.me/573207328453" class="btn-p" target="_blank">Quiero más clientes →</a>
@@ -485,6 +397,7 @@ footer {
   </div>
 </div>
 
+<!-- OFERTA -->
 <div class="sec" id="oferta">
   <div class="eyebrow-pill">La oferta</div>
   <h2 class="sec-title">Sistema de <span class="g">Conversaciones<br>Calificadas</span></h2>
@@ -501,12 +414,13 @@ footer {
       </div>
       <div class="bono-box">
         <div class="bono-label">Bonos incluidos sin costo adicional</div>
-        <div class="bono-row"><span>Implementación completa de campañas desde cero</span><span class="bono-val">$400.000</span></div>
-        <div class="bono-row"><span>Configuración del píxel y API de conversiones</span><span class="bono-val">$250.000</span></div>
-        <div class="bono-row"><span>Guía de respuesta rápida para tu equipo comercial</span><span class="bono-val">$150.000</span></div>
+        <div class="bono-row"><span>Implementación completa de campañas desde cero</span><span class="bono-val">$600.000</span></div>
+        <div class="bono-row"><span>Configuración del píxel y API de conversiones</span><span class="bono-val">$400.000</span></div>
+        <div class="bono-row"><span>Guía de respuesta rápida para tu equipo comercial</span><span class="bono-val">$200.000</span></div>
+        <div class="bono-row"><span>Dashboard de reporte en Looker Studio</span><span class="bono-val">$350.000</span></div>
         <div class="bono-total-row">
           <span class="bono-total-label">Valor total de bonos</span>
-          <span class="bono-total-val">$800.000</span>
+          <span class="bono-total-val">$1.550.000</span>
         </div>
       </div>
     </div>
@@ -525,6 +439,7 @@ footer {
   </div>
 </div>
 
+<!-- GARANTÍA -->
 <div class="sec" style="padding-top: 0; border-top: none;">
   <div class="garantia-box">
     <div class="garantia-icon">🛡️</div>
@@ -538,6 +453,7 @@ footer {
   </div>
 </div>
 
+<!-- PROCESO -->
 <div class="sec" id="proceso">
   <div class="eyebrow-pill">Cómo funciona</div>
   <h2 class="sec-title">Del primer contacto<br>a campañas activas<br><span class="g">en 7 días</span></h2>
@@ -573,12 +489,14 @@ footer {
   </div>
 </div>
 
+<!-- CASOS -->
 <div class="sec" id="casos">
   <div class="eyebrow-pill">Casos reales</div>
   <h2 class="sec-title">Números que <span class="g">no se inventan</span></h2>
   <p class="sec-sub">Mejores meses documentados por cuenta. Sin redondeos ni estimaciones.</p>
 
   <div class="casos-grid">
+
     <div class="caso feat">
       <div class="feat-l">
         <div class="feat-empresa">Pladani</div>
@@ -662,19 +580,33 @@ footer {
         <div><div class="n-val hl">~2.000</div><div class="n-label">Conversaciones/mes</div></div>
         <div><div class="n-val">$1.578</div><div class="n-label">CPL promedio COP</div></div>
       </div>
-      <div class="caso-nota">Campañas de mensajes WhatsApp y leads con formulario filtro. CPL desde $1.214 COP en mejor campaña. Ticket del servicio: $50M–$100M COP en deudas negociadas.</div>
+      <div class="caso-nota">Campañas WhatsApp + leads con formulario filtro. CPL desde $1.214 COP en mejor campaña. Ticket del servicio: $50M–$100M COP en deudas negociadas.</div>
+    </div>
+
+    <div class="caso">
+      <div class="caso-head">
+        <div><div class="caso-empresa">La Lavandería & Bakery</div><div class="caso-desc-txt">Negocio local · 3 sedes · Barranquilla</div></div>
+        <span class="canal mix">Meta + Google</span>
+      </div>
+      <div class="nums">
+        <div><div class="n-val">$700K</div><div class="n-label">Inversión COP/mes</div></div>
+        <div><div class="n-val hl">451</div><div class="n-label">Conversiones agosto</div></div>
+        <div><div class="n-val">$1.700</div><div class="n-label">CPL Google Ads</div></div>
+      </div>
+      <div class="caso-nota">Google Ads dominando búsquedas en Barranquilla con 67% de impresión en posición superior. Meta Ads: 139 conversaciones a $3.700 COP. Clientes reportan incremento directo en ventas en las 3 sedes.</div>
     </div>
 
   </div>
 </div>
 
+<!-- SOBRE MÍ -->
 <div class="sec" id="sobre">
   <div class="eyebrow-pill">Quién está detrás</div>
   <h2 class="sec-title">Ernesto Vargas</h2>
   <div class="sobre-grid">
     <div class="sobre-txt">
       <p>Soy <strong>comunicador social de profesión y experto en performance marketing</strong>. Esa combinación no es casual — entiendo los mensajes, cómo construir un argumento y por qué una pieza conecta con una audiencia. Eso, combinado con más de 12 años en paid media, diferencia mi trabajo del de alguien que solo maneja dashboards.</p>
-      <p>Empecé en medios de comunicación en Venezuela. Cuando el sector colapsó, migré al mundo digital — primero en community management, luego en publicidad, hasta especializarme en <strong>campañas de mensajes a WhatsApp y captación de leads por formulario</strong> para negocios que cierran con asesor comercial.</p>
+      <p>Empecé en medios de comunicación en Venezuela. Cuando el sector colapsó, migré al mundo digital — primero en community management, luego en publicidad, hasta especializarme en <strong>campañas de mensajes a WhatsApp y captación de leads por formulario</strong> para negocios que cierran con asesor comercial o agente de inteligencia artificial.</p>
       <p>No soy una agencia de 10 personas. Soy la persona que trabaja tu cuenta directamente, todos los días.</p>
     </div>
     <div class="sobre-photo">
@@ -683,6 +615,7 @@ footer {
   </div>
 </div>
 
+<!-- FAQ -->
 <div class="sec" id="faq">
   <div class="eyebrow-pill">Preguntas frecuentes</div>
   <h2 class="sec-title">Lo que siempre<br><span class="g">me preguntan</span></h2>
@@ -714,10 +647,11 @@ footer {
   </div>
 </div>
 
+<!-- CTA FINAL -->
 <div class="cta-sec" id="contacto">
   <div class="cta-inner">
     <div class="eyebrow-pill" style="margin: 0 auto 24px; display: inline-flex;">Siguiente paso</div>
-    <h2>¿Tu negocio necesita<br>más <span class="g">clientes?</span></h2>
+    <h2>Si vendes con asesor comercial<br>o agente de IA,<br><span class="g">esto es para ti.</span></h2>
     <p>Escríbeme por WhatsApp, cuéntame qué vendes y en menos de 24 horas te digo si puedo ayudarte y cuánto te costaría un lead en tu nicho.</p>
     <a href="https://wa.me/573207328453?text=Hola%20Ernesto%2C%20me%20interesa%20el%20Sistema%20de%20Conversaciones%20Calificadas" class="btn-p" target="_blank">Escribir por WhatsApp →</a>
     <div class="cta-disclaimer">Sin compromiso. Sin contratos largos el primer mes.<br>Si no veo potencial real en tu negocio, te lo digo antes de cobrar.</div>
@@ -735,14 +669,9 @@ footer {
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particles = [];
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resize();
 window.addEventListener('resize', resize);
-
 function Particle() {
   this.x = Math.random() * canvas.width;
   this.y = Math.random() * canvas.height;
@@ -753,28 +682,18 @@ function Particle() {
   const colors = ['#4DFFA0', '#4D9FFF', '#FF6B8A', '#FFFFFF'];
   this.color = colors[Math.floor(Math.random() * colors.length)];
 }
-
 Particle.prototype.update = function() {
-  this.x += this.speedX;
-  this.y += this.speedY;
+  this.x += this.speedX; this.y += this.speedY;
   if (this.x < 0) this.x = canvas.width;
   if (this.x > canvas.width) this.x = 0;
   if (this.y < 0) this.y = canvas.height;
   if (this.y > canvas.height) this.y = 0;
 };
-
 Particle.prototype.draw = function() {
-  ctx.save();
-  ctx.globalAlpha = this.opacity;
-  ctx.fillStyle = this.color;
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
+  ctx.save(); ctx.globalAlpha = this.opacity; ctx.fillStyle = this.color;
+  ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore();
 };
-
 for (let i = 0; i < 80; i++) particles.push(new Particle());
-
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   particles.forEach(p => { p.update(); p.draw(); });
