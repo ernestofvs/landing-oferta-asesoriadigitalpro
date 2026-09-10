@@ -34,7 +34,6 @@ body {
   overflow-x: hidden;
 }
 
-/* CANVAS PARTÍCULAS */
 #particles {
   position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;
@@ -42,7 +41,6 @@ body {
   opacity: 0.4;
 }
 
-/* GLOW DE FONDO */
 .glow-wrap {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none; z-index: 0; overflow: hidden;
@@ -55,11 +53,9 @@ body {
 .glow-2 { width: 500px; height: 500px; background: #FF6B8A; top: 20%; right: -150px; }
 .glow-3 { width: 400px; height: 400px; background: #4D9FFF; bottom: 10%; left: 30%; }
 
-/* LAYOUT */
 .page { position: relative; z-index: 1; }
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
 
-/* NAV */
 nav {
   position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
   z-index: 100; width: calc(100% - 48px); max-width: 1040px;
@@ -90,7 +86,6 @@ nav {
 }
 .nav-cta:hover { opacity: 0.85; }
 
-/* HERO */
 .hero {
   min-height: 100vh;
   display: flex; flex-direction: column; justify-content: center;
@@ -151,7 +146,6 @@ nav {
 }
 .btn-s:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
 
-/* STATS */
 .hero-stats {
   display: flex; gap: 0;
   border-top: 1px solid var(--borde);
@@ -170,7 +164,6 @@ nav {
 .hstat-num .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hstat-label { font-size: 12px; color: var(--texto-suave); line-height: 1.4; }
 
-/* SECCIONES */
 .sec {
   max-width: 1080px; margin: 0 auto;
   padding: 80px 48px;
@@ -200,7 +193,6 @@ nav {
   max-width: 500px; line-height: 1.75; margin-bottom: 48px;
 }
 
-/* OFERTA */
 .oferta-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
 
 .oferta-includes { margin-bottom: 28px; }
@@ -239,7 +231,6 @@ nav {
   text-decoration: line-through;
 }
 
-/* PRECIO CARD */
 .precio-card {
   background: var(--card2);
   border: 1px solid var(--borde2);
@@ -279,7 +270,6 @@ nav {
 .btn-cta-card:hover { opacity: 0.85; }
 .precio-disclaimer { font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 12px; line-height: 1.5; }
 
-/* GARANTÍA */
 .garantia-box {
   background: var(--card);
   border: 1px solid var(--borde2);
@@ -300,7 +290,6 @@ nav {
 .garantia-text { font-size: 14px; color: var(--texto); line-height: 1.8; }
 .garantia-text strong { color: var(--acento); font-weight: 500; }
 
-/* PROCESO */
 .proceso-list { display: flex; flex-direction: column; gap: 0; }
 .paso {
   display: grid; grid-template-columns: 56px 1fr;
@@ -321,7 +310,6 @@ nav {
 .paso-title { font-size: 16px; font-weight: 600; color: var(--blanco); margin-bottom: 6px; font-family: 'Outfit', sans-serif; }
 .paso-desc { font-size: 14px; color: var(--texto); line-height: 1.65; }
 
-/* CASOS */
 .casos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .caso {
   background: var(--card); border: 1px solid var(--borde);
@@ -371,13 +359,10 @@ nav {
 .n-label { font-size: 11px; color: var(--texto-suave); line-height: 1.4; }
 .caso-nota { padding: 0 20px 14px; font-size: 11px; color: var(--texto-suave); font-style: italic; line-height: 1.6; border-top: 1px solid var(--borde); padding-top: 10px; }
 
-/* SOBRE */
 .sobre-grid { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
 .sobre-txt p { font-size: 15px; color: var(--texto); line-height: 1.85; margin-bottom: 14px; }
 .sobre-txt p strong { color: var(--blanco); font-weight: 500; }
-.sobre-photo {
-  position: relative;
-}
+.sobre-photo { position: relative; }
 .sobre-photo::before {
   content: '';
   position: absolute; inset: -1px;
@@ -389,7 +374,6 @@ nav {
   filter: grayscale(15%); position: relative; z-index: 1;
 }
 
-/* FAQ */
 .faq-list { display: flex; flex-direction: column; gap: 0; }
 details.faq { border-bottom: 1px solid var(--borde); }
 details.faq:first-child { border-top: 1px solid var(--borde); }
@@ -403,7 +387,6 @@ details[open] summary.faq-q::after { transform: rotate(45deg); }
 .faq-a { padding: 0 0 20px; font-size: 14px; color: var(--texto); line-height: 1.8; max-width: 640px; }
 .faq-a strong { color: var(--blanco); font-weight: 500; }
 
-/* CTA */
 .cta-sec {
   padding: 100px 48px;
   text-align: center;
@@ -421,7 +404,6 @@ details[open] summary.faq-q::after { transform: rotate(45deg); }
 .cta-sec p { font-size: 15px; color: var(--texto); line-height: 1.75; margin-bottom: 36px; }
 .cta-disclaimer { font-size: 12px; color: var(--texto-suave); margin-top: 16px; line-height: 1.6; }
 
-/* FOOTER */
 footer {
   border-top: 1px solid var(--borde);
   padding: 22px 48px;
@@ -430,7 +412,6 @@ footer {
   position: relative; z-index: 1;
 }
 
-/* RESPONSIVE */
 @media (max-width: 860px) {
   nav { width: calc(100% - 24px); padding: 12px 16px; }
   .nav-links { display: none; }
@@ -454,19 +435,16 @@ footer {
 </head>
 <body>
 
-<!-- GLOWS -->
 <div class="glow-wrap">
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
   <div class="glow glow-3"></div>
 </div>
 
-<!-- PARTÍCULAS -->
 <canvas id="particles"></canvas>
 
 <div class="page">
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Asesoría <span>Digital Pro</span></div>
   <div class="nav-links">
@@ -478,7 +456,6 @@ footer {
   <a href="https://wa.me/573207328453" class="nav-cta" target="_blank">Quiero empezar →</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Paid Media · Captación de clientes</div>
   <h1>
@@ -508,7 +485,6 @@ footer {
   </div>
 </div>
 
-<!-- OFERTA -->
 <div class="sec" id="oferta">
   <div class="eyebrow-pill">La oferta</div>
   <h2 class="sec-title">Sistema de <span class="g">Conversaciones<br>Calificadas</span></h2>
@@ -549,7 +525,6 @@ footer {
   </div>
 </div>
 
-<!-- GARANTÍA -->
 <div class="sec" style="padding-top: 0; border-top: none;">
   <div class="garantia-box">
     <div class="garantia-icon">🛡️</div>
@@ -563,7 +538,6 @@ footer {
   </div>
 </div>
 
-<!-- PROCESO -->
 <div class="sec" id="proceso">
   <div class="eyebrow-pill">Cómo funciona</div>
   <h2 class="sec-title">Del primer contacto<br>a campañas activas<br><span class="g">en 7 días</span></h2>
@@ -599,7 +573,6 @@ footer {
   </div>
 </div>
 
-<!-- CASOS -->
 <div class="sec" id="casos">
   <div class="eyebrow-pill">Casos reales</div>
   <h2 class="sec-title">Números que <span class="g">no se inventan</span></h2>
@@ -678,10 +651,23 @@ footer {
       </div>
       <div class="caso-nota">Ecommerce de nicho. ROAS consistente en el mejor mes documentado.</div>
     </div>
+
+    <div class="caso">
+      <div class="caso-head">
+        <div><div class="caso-empresa">Santo Domingo Legal Solutions</div><div class="caso-desc-txt">Negociación de deudas · Servicios legales</div></div>
+        <span class="canal meta">Meta Ads</span>
+      </div>
+      <div class="nums">
+        <div><div class="n-val">~$5M</div><div class="n-label">Inversión COP/mes</div></div>
+        <div><div class="n-val hl">~2.000</div><div class="n-label">Conversaciones/mes</div></div>
+        <div><div class="n-val">$1.578</div><div class="n-label">CPL promedio COP</div></div>
+      </div>
+      <div class="caso-nota">Campañas de mensajes WhatsApp y leads con formulario filtro. CPL desde $1.214 COP en mejor campaña. Ticket del servicio: $50M–$100M COP en deudas negociadas.</div>
+    </div>
+
   </div>
 </div>
 
-<!-- SOBRE MÍ -->
 <div class="sec" id="sobre">
   <div class="eyebrow-pill">Quién está detrás</div>
   <h2 class="sec-title">Ernesto Vargas</h2>
@@ -697,7 +683,6 @@ footer {
   </div>
 </div>
 
-<!-- FAQ -->
 <div class="sec" id="faq">
   <div class="eyebrow-pill">Preguntas frecuentes</div>
   <h2 class="sec-title">Lo que siempre<br><span class="g">me preguntan</span></h2>
@@ -729,7 +714,6 @@ footer {
   </div>
 </div>
 
-<!-- CTA FINAL -->
 <div class="cta-sec" id="contacto">
   <div class="cta-inner">
     <div class="eyebrow-pill" style="margin: 0 auto 24px; display: inline-flex;">Siguiente paso</div>
@@ -745,10 +729,9 @@ footer {
   <span>asesoriadigitalpro.com · Barranquilla, Colombia</span>
 </footer>
 
-</div><!-- /page -->
+</div>
 
 <script>
-// PARTÍCULAS
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particles = [];
